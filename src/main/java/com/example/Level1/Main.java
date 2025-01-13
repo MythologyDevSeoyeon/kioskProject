@@ -5,15 +5,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
+
         System.out.println("[ SHAKESHACK MENU ]");
 
-        String[][] menuItems = {
-                {"1.", "ShackBurger", "6.9", "토마토, 양상추, 쉑소스가 토핑된 치즈버거"},
-                {"2.", "SmokeShack", "8.9", "베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거"},
-                {"3.", "Cheeseburger", "6.9", "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거"},
-                {"4.", "Hamburger", "5.4", "비프패티를 기반으로 야채가 들어간 기본버거"}
-        };
+        String[][] menuItems = dataInitialize();
 
         for (String[] item : menuItems) {
             System.out.printf("%-3s %-15s | W %-4s | %s\n", item[0], item[1], item[2], item[3]);
@@ -50,5 +47,15 @@ public class Main {
                 sc.next();
             }
         }
+    }
+
+    //데이터 초기화
+    public static String[][] dataInitialize() {
+        return new String[][]{
+                {"1.", "ShackBurger", "6.9", "토마토, 양상추, 쉑소스가 토핑된 치즈버거"},
+                {"2.", "SmokeShack", "8.9", "베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거"},
+                {"3.", "Cheeseburger", "6.9", "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거"},
+                {"4.", "Hamburger", "5.4", "비프패티를 기반으로 야채가 들어간 기본버거"}
+        };
     }
 }
