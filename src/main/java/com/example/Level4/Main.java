@@ -18,14 +18,21 @@ public class Main {
         drinks.add(new MenuItem("MilkShake", 5.9, "밀크쉐이크"));
         drinks.add(new MenuItem("Lemonade", 3.9, "레몬에이드"));
 
+        List<MenuItem> desserts = new ArrayList<>();
+        desserts.add(new MenuItem("Cookie", 2.8, "바삭한 쿠키"));
+        desserts.add(new MenuItem("ChocoCake", 4.9, "달달한 초코쿠키"));
+
         //메뉴 객체 생성
         Menu hamburgerMenu  = new Menu ("Hamburgers", hamburgers);
         Menu drinksMenu = new Menu("Drinks", drinks);
+        Menu dessertsMenu = new Menu ("Desserts", desserts);
 
-        //키오스크 객체 생성
-        Kiosk kiosk = new Kiosk();
-        kiosk.menus.add(hamburgerMenu);
-        kiosk.menus.add(drinksMenu);
+        //키오스크 객체 생성 -> List<Menu>
+        List<Menu> menus = new ArrayList<>();
+        Kiosk kiosk = new Kiosk(menus);
+        menus.add(hamburgerMenu);
+        menus.add(drinksMenu);
+        menus.add(dessertsMenu);
 
         //키오스크 실행
         kiosk.start();
