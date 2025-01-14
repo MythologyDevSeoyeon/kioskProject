@@ -3,7 +3,6 @@ package com.example.Level4;
 import java.util.List;
 
 public class Menu {
-
     //필드 : 메뉴 아이템들의 리스트 + 카테고리
     List<MenuItem> menuItems;
     String category;
