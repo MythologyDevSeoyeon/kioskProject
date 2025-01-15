@@ -22,5 +22,6 @@ public class Menu {
             System.out.printf("%d. %-15s | W %-4.1f | %s\n",
                     (i + 1), item.name, item.price, item.description);
         }
+        System.out.println("0. 뒤로가기");
     }
 }

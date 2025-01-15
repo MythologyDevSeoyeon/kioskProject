@@ -11,6 +11,7 @@ public class Main {
 
         //키오스크 객체 생성
         Kiosk kiosk = new Kiosk(menus);
+
         //키오스크 실행
         kiosk.start();
 
@@ -49,7 +50,7 @@ public class Main {
     public static List<MenuItem> createDesserts() {
         List<MenuItem> desserts = new ArrayList<>();
         desserts.add(new MenuItem("Cookie", 2.8, "바삭한 쿠키"));
-        desserts.add(new MenuItem("ChocoCake", 4.9, "달달한 초코쿠키"));
+        desserts.add(new MenuItem("ChocoCake", 4.9, "달달한 초코케이크"));
         return desserts;
     }
 }
