@@ -26,7 +26,7 @@ public class Menu {
     }
 
     //메뉴 아이템의 리스트를 출력하는 메소드
-    public void displayMenuItem(){
+    public void displayMenuItems(){
         System.out.println("[" + getCategory() + "]");
         for(int i = 0; i < getMenuItems().size(); i++){
             MenuItem item  = getMenuItems().get(i);
