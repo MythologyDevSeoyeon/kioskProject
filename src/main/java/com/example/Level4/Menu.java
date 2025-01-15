@@ -14,7 +14,7 @@ public class Menu {
         this.menuItems = menuItems;
     }
 
-    //메뉴 안의 메뉴 아이템을 출력하는 메소드
+    //메뉴 아이템들의 리스트를 출력하는 메소드
     public void displayMenuItem(){
         System.out.println("[" + category + "]");
         for(int i = 0; i < menuItems.size(); i++){
