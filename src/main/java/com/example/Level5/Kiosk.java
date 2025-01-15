@@ -1,9 +1,13 @@
 package com.example.Level5;
+
 import java.util.*;
 
 public class Kiosk {
+
+    //필드
     private final List<Menu> menus;
 
+    //생성자
     Kiosk(List<Menu> menus) {
         this.menus = menus;
     }
@@ -12,7 +16,6 @@ public class Kiosk {
     public List<Menu> getMenus() {
         return Collections.unmodifiableList(menus);
     }
-
 
     //키오스크 시작 메소드
     public void start() {
@@ -59,7 +62,6 @@ public class Kiosk {
         }
         return option;
     }
-
 
     //상위 메뉴를 출력하는 메소드
     public void displayMainMenu() {
