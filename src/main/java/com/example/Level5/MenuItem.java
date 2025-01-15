@@ -13,19 +13,8 @@ public class MenuItem {
         this.description = description;
     }
 
-    //getter
-    public String getName() {
-        return name;
-    }
-
-    //getter
-    public double getPrice(){
-        return price;
-    }
-
-    //getter
-    public String getDescription(){
-        return description;
+    //아이템 parse (getter 대신)
+    public String parseDisplayItem(){
+        return String.format("%-15s | W %-4.1f | %s", name, price, description);
     }
 }
-

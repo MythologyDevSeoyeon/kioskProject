@@ -25,13 +25,4 @@ public class Menu {
         return category;
     }
 
-    //메뉴 아이템의 리스트를 출력하는 메소드
-    public void displayMenuItems(){
-        System.out.println("[" + getCategory() + "]");
-        for(int i = 0; i < getMenuItems().size(); i++){
-            MenuItem item  = getMenuItems().get(i);
-            System.out.printf("%d. %-15s | W %-4.1f | %s\n",
-                    (i + 1), item.getName(), item.getPrice(), item.getDescription());
-        }
-    }
 }

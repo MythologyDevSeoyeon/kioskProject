@@ -13,7 +13,7 @@ public class Kiosk {
     }
 
     //메뉴 리스트를 반환하는 getter
-    public List<Menu> getMenus() {
+    private List<Menu> getMenus() {
         return Collections.unmodifiableList(menus);
     }
 
@@ -34,15 +34,14 @@ public class Kiosk {
             }
 
             Menu menu = getMenus().get(option - 1); // 선택한 메뉴
-            menu.displayMenuItems();  // 메뉴안의 아이템들을 출력
-
+            displaySubMenu(menu);  // 메뉴안의 아이템들을 출력
             handleSubMenu(menu);  //하위 메뉴 아이템 반복 로직
 
         }
     }
 
     //예외 처리된 입력값 메소드
-    public int getUserInput(String prompt) {
+    private int getUserInput(String prompt) {
         Scanner sc = new Scanner(System.in);
         System.out.print(prompt); // 출력 문구
         int option = -1;
@@ -57,7 +56,7 @@ public class Kiosk {
     }
 
     //상위 메뉴를 출력하는 메소드
-    public void displayMainMenu() {
+    private void displayMainMenu() {
         System.out.println("[ Main Menu ]");
         for (int i = 0; i < getMenus().size(); i++) {
             Menu menu = getMenus().get(i);
@@ -66,10 +65,20 @@ public class Kiosk {
         System.out.println("0. 종료하기");
     }
 
-    //하위 메뉴를 반복 출력하는 메소드
-    public void handleSubMenu(Menu menu) {
-        while (true) {
 
+    //하위 메뉴를 출력하는 메소드
+    private void displaySubMenu(Menu menu) {
+        System.out.println("[" + menu.getCategory() + "]");
+        for (int i = 0; i < menu.getMenuItems().size(); i++) {
+            MenuItem item = menu.getMenuItems().get(i);
+            System.out.printf("%d. %s \n",
+                    (i + 1), item.parseDisplayItem());
+        }
+    }
+
+    //하위 메뉴를 반복 출력하는 메소드
+    private void handleSubMenu(Menu menu) {
+        while (true) {
             int option = getUserInput("주문하실 항목을 선택하세요 : "); // 입력값 받기 및 검증
 
             if (option == 0) { // 뒤로 가기
@@ -80,7 +89,7 @@ public class Kiosk {
             } else {
                 MenuItem item = menu.getMenuItems().get(option - 1); // 선택한 메뉴 아이템
                 System.out.printf("== %d번 메뉴를 선택 하였습니다.\n", option); //메뉴 아이템 출력
-                System.out.printf("== %s | W %-4.1f | %s \n", item.getName(), item.getPrice(), item.getDescription());
+                System.out.printf("== %s \n", item.parseDisplayItem());
             }
         }
     }

@@ -13,19 +13,20 @@ public class Main {
 
         //kiosk 시작 메소드
         kiosk.start();
+
     }
 
     //메뉴의 리스트 생성 및 데이터 초기화
     public static List<Menu> initializeMenu() {
         List<Menu> menus = new ArrayList<>();
-        menus.add(new Menu("Hamburgers", createHamburgers()));
-        menus.add(new Menu("Drinks", createDrinks()));
-        menus.add(new Menu("Desserts", createDesserts()));
+        menus.add(new Menu("Hamburgers", createHamburgerMenuData()));
+        menus.add(new Menu("Drinks", createDrinkMenuData()));
+        menus.add(new Menu("Desserts", createDessertsMenuData()));
         return menus;
     }
 
     //hamburger 메뉴의 MenuItem 리스트 생성 및 데이터 초기화
-    public static List<MenuItem> createHamburgers() {
+    public static List<MenuItem> createHamburgerMenuData() {
         List<MenuItem> hamburgers = new ArrayList<>();
         hamburgers.add(new MenuItem("ShackBurger", 6.9, "토마토, 양상추, 쉑소스가 토핑된 치즈버거"));
         hamburgers.add(new MenuItem("SmokeShack", 8.9, "베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거"));
@@ -35,7 +36,7 @@ public class Main {
     }
 
     //drink 메뉴의 MenuItem 리스트 생성 및 데이터 초기화
-    public static List<MenuItem> createDrinks() {
+    public static List<MenuItem> createDrinkMenuData() {
         List<MenuItem> drinks = new ArrayList<>();
         drinks.add(new MenuItem("Coke", 2.5, "탄산음료"));
         drinks.add(new MenuItem("Water", 0.9, "생수"));
@@ -45,7 +46,7 @@ public class Main {
     }
 
     //dessert 메뉴의 MenuItem 리스트 생성 및 데이터 초기화
-    public static List<MenuItem> createDesserts() {
+    public static List<MenuItem> createDessertsMenuData() {
         List<MenuItem> desserts = new ArrayList<>();
         desserts.add(new MenuItem("Cookie", 2.8, "바삭한 쿠키"));
         desserts.add(new MenuItem("ChocoCake", 4.9, "달달한 초코케이크"));
