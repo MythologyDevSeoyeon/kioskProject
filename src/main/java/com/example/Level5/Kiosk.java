@@ -1,5 +1,4 @@
 package com.example.Level5;
-
 import java.util.*;
 
 public class Kiosk {
@@ -74,6 +73,7 @@ public class Kiosk {
             System.out.printf("%d. %s \n",
                     (i + 1), item.parseDisplayItem());
         }
+        System.out.println("0. 뒤로가기");
     }
 
     //하위 메뉴를 반복 출력하는 메소드
