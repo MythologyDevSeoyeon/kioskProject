@@ -42,14 +42,17 @@ public class Kiosk {
     //예외 처리된 입력값 메소드
     private int getUserInput(String prompt) {
         Scanner sc = new Scanner(System.in);
-        System.out.print(prompt); // 출력 문구
         int option = -1;
-        try {
-            option = sc.nextInt();
-            sc.nextLine();
-        } catch (InputMismatchException e) {
-            System.out.println("잘못된 값입니다. 숫자를 입력하세요.");
-            sc.nextLine();
+        while (true) {
+            System.out.print(prompt); // 출력 문구
+            try {
+                option = sc.nextInt();
+                sc.nextLine(); // 남아있는 입력 제거
+                break; // 유효한 입력 시 루프 종료
+            } catch (InputMismatchException e) {
+                System.out.println("잘못된 값입니다. 숫자를 입력하세요.");
+                sc.nextLine(); // 잘못된 입력 제거
+            }
         }
         return option;
     }
