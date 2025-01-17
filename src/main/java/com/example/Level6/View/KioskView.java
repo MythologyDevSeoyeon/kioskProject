@@ -3,6 +3,7 @@ package com.example.Level6.View;
 import com.example.Level6.Model.Cart;
 import com.example.Level6.Model.Menu;
 import com.example.Level6.Model.MenuItem;
+import com.example.Level6.Model.UserType;
 
 import java.util.List;
 
@@ -43,8 +44,16 @@ public class KioskView {
             sum += item.getPrice();
         }
         System.out.println(" [ Total ] ");
-        System.out.println("W " + sum);
+        System.out.printf("W %.1f\n",sum);
         return sum;
+    }
+
+    //할인 정보 출력
+    public static void displayDiscount() {
+        UserType[] userTypes = UserType.values();
+        for (int i = 0; i < UserType.values().length; i++) {
+            System.out.printf("%d. %s: %d%%\n", i+1, userTypes[i].getName(), userTypes[i].getDiscountPercent());
+        }
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.Level6.Controller;
 import com.example.Level6.Model.Cart;
 import com.example.Level6.Model.Menu;
 import com.example.Level6.Model.MenuItem;
+import com.example.Level6.Model.UserType;
 import com.example.Level6.View.KioskView;
 
 import java.util.ArrayList;
@@ -40,7 +41,6 @@ public class KioskController {
 
             if (option == 4) {
                 if (cart.checkItem()) {
-                    KioskView.displayOrderList(cart);
                     handleOrder(); // 주문 관련 메소드
                     continue;
                 }
@@ -84,11 +84,12 @@ public class KioskController {
 
     // 주문 메소드
     private void handleOrder() {
+        double sum = KioskView.displayOrderList(cart);
         while (true) {
             int confirm = getUserInput(String.format("%-10s | %s\n", "1. 주문", "2. 메뉴판"));
             if (confirm == 1) {
-                double sum = KioskView.displayOrderList(cart);
-                System.out.printf("주문이 완료되었습니다. 총 금액은 W %.1f입니다.\n", sum);
+                System.out.printf("총 금액은 W %.1f입니다.\n", sum);
+                handleDiscount(sum);
                 cart.clearItem();
                 break;
             } else if (confirm == 2) {
@@ -99,6 +100,18 @@ public class KioskController {
             }
         }
     }
+
+    //할인 정보 출력
+    private void handleDiscount(double sum) {
+        System.out.println("[ Discount User ]");
+        KioskView.displayDiscount();
+        int inputType = getUserInput("할인 정보를 입력해주세요\n");
+        UserType[] userTypes = UserType.values();
+        UserType user = userTypes[inputType - 1];
+        double totalCount = sum - sum * user.getDiscountPercent()/100;
+        System.out.printf("주문이 완료되었습니다. 총 금액은 W %.1f 입니다.\n",totalCount);
+    }
+
 
     //서브 메뉴를 선택
     private MenuItem handleSubMenu(Menu menu) {
