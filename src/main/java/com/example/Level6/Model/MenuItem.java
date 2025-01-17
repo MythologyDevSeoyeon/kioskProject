@@ -1,4 +1,4 @@
-package com.example.Level6;
+package com.example.Level6.Model;
 
 public class MenuItem {
     //필드
@@ -7,22 +7,22 @@ public class MenuItem {
     private final String description;
 
     //생성자
-    MenuItem(String name, double price, String description) {
+    public MenuItem(String name, double price, String description) {
         this.name = name;
         this.price = price;
         this.description = description;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public double getPrice(){
+    public double getPrice() {
         return price;
     }
 
     //아이템 parse (getter 대신)
-    public String converterFormatDisplay(){
+    public String converterFormatDisplay() {
         return String.format("%-15s | W %-4.1f | %s", name, price, description);
     }
 }

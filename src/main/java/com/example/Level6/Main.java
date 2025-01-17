@@ -1,4 +1,9 @@
 package com.example.Level6;
+
+import com.example.Level6.Controller.KioskController;
+import com.example.Level6.Model.Menu;
+import com.example.Level6.Model.MenuItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,10 +11,10 @@ public class Main {
     public static void main(String[] args) {
 
         //Menu리스트에 초기값 추가
-        List<Menu> menus =initializeMenu();
+        List<Menu> menus = initializeMenu();
 
-        //kiosk 객체 생성
-        Kiosk kiosk = new Kiosk(menus);
+        //kioskController 객체 생성
+        KioskController kiosk = new KioskController(menus);
 
         //kiosk 시작 메소드
         kiosk.start();
