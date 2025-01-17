@@ -30,6 +30,7 @@ public class Kiosk {
                 break;
             }
 
+            //장바구니 제품 유무로, option의 선택지 증가
             int maxIndex = cart.checkItem() ? 5 : 3;
             if (option < 1 || option > maxIndex) { //없는 메뉴
                 System.out.println("xx 없는 메뉴 입니다. 다시 입력해주세요. xx");
@@ -43,6 +44,12 @@ public class Kiosk {
                 }
             }
 
+            if (option == 5) {
+                System.out.println("진행중인 주문을 취소하였습니다.");
+                cart.clearItem();
+                continue;
+            }
+
             Menu menu = menus.get(option - 1); // 선택한 메뉴
             displaySubMenu(menu);  // 메뉴안의 아이템들을 출력
             MenuItem item = handleSubMenu(menu);  //하위 메뉴 아이템 선택
@@ -50,22 +57,6 @@ public class Kiosk {
 
         }
     }
-
-    //상위 메뉴를 출력하는 메소드
-    private void displayMainMenu() {
-        System.out.println("[ Main Menu ]");
-        for (int i = 0; i < getMenus().size(); i++) {
-            Menu menu = getMenus().get(i);
-            System.out.printf("%d. %-15s\n", (i + 1), menu.getCategory());  // 출력 문구
-        }
-        if (cart.checkItem()) {
-            System.out.println(" [ Order Menu ]");
-            System.out.printf("%-15s | 장바구니를 확인 후 주문합니다.\n", "4. Orders");
-            System.out.printf("%-15s | 진행중인 주문을 취소합니다.\n", "5. Cancel");
-        }
-        System.out.println("0. 종료하기");
-    }
-
 
     //예외 처리된 입력값 메소드
     private int getUserInput(String prompt) {
@@ -85,49 +76,20 @@ public class Kiosk {
         return option;
     }
 
-    // 주문 메소드
-    private void handleOrder() {
-        System.out.println(" [ Orders ]");
-        double sum = 0;
-        for (MenuItem item : cart.getOrderList()) {
-            System.out.println(item.converterFormatDisplay());
-            sum += item.getPrice();
+    //메인 메뉴 리스트를 출력
+    private void displayMainMenu() {
+        System.out.println("[ Main Menu ]");
+        for (int i = 0; i < getMenus().size(); i++) {
+            Menu menu = getMenus().get(i);
+            System.out.printf("%d. %-15s\n", (i + 1), menu.getCategory());  // 출력 문구
         }
-        System.out.println(" [ Total ] ");
-        System.out.println("W " + sum);
-
-        System.out.println("주문 하시겠습니까?");
-
-        int confirm = getUserInput(String.format("%-10s | %s\n", "1. 주문", "2. 메뉴판"));
-        if (confirm == 1) {
-            System.out.printf("주문이 완료되었습니다. 총 금액은 W %.1f입니다.\n", sum);
-            cart.clearItem();
-        } else if (confirm == 2) {
-            System.out.println("메뉴판으로 이동하였습니다.");
-        } else {
-            System.out.println("잘못된 값을 입력하였습니다. 메뉴판으로 이동합니다.");
+        if (cart.checkItem()) {
+            System.out.println(" [ Order Menu ]");
+            System.out.printf("%-15s | 장바구니를 확인 후 주문합니다.\n", "4. Orders");
+            System.out.printf("%-15s | 진행중인 주문을 취소합니다.\n", "5. Cancel");
         }
+        System.out.println("0. 종료하기");
     }
-
-
-    // 장바구니 메소드
-    private void handleCart(MenuItem item) {
-        if (item == null) {
-            return;
-        }
-        int option = getUserInput(String.format("위 메뉴를 장바구니에 추가하겠습니까?\n%-10s | %s \n", "1. 확인", "2. 취소"));
-        if (option != 1 && option != 2) {
-            System.out.println("잘못된 값을 입력하였습니다. 메뉴판으로 이동합니다.");
-            return;
-        }
-        if (option == 1) {
-            cart.addItem(item);
-            System.out.println(item.getName() + "이(가) 추가되었습니다.");
-        } else {
-            System.out.println("장바구니 추가를 취소했습니다.");
-        }
-    }
-
 
     //서브 메뉴 리스트를 출력
     private void displaySubMenu(Menu menu) {
@@ -156,6 +118,56 @@ public class Kiosk {
             System.out.printf("== %d번 메뉴를 선택 하였습니다.\n", option); //메뉴 아이템 출력
             System.out.printf("== %s \n", item.converterFormatDisplay());
             return item;
+        }
+    }
+
+    // 장바구니 메소드
+    private void handleCart(MenuItem item) {
+        if (item == null) {
+            return;
+        }
+        while(true) {
+            int option = getUserInput(String.format("위 메뉴를 장바구니에 추가하겠습니까?\n%-10s | %s \n", "1. 확인", "2. 취소"));
+            if (option != 1 && option != 2) {
+                System.out.println("잘못된 값을 입력하였습니다.");
+                continue;
+            }
+            if (option == 1) {
+                cart.addItem(item);
+                System.out.println(item.getName() + "이(가) 추가되었습니다.");
+            } else {
+                System.out.println("장바구니 추가를 취소했습니다.");
+            }
+            break;
+        }
+    }
+
+    // 주문 메소드
+    private void handleOrder() {
+        //주문 목록 출력
+        System.out.println(" [ Orders ]");
+        double sum = 0;
+        for (MenuItem item : cart.getOrderList()) {
+            System.out.println(item.converterFormatDisplay());
+            sum += item.getPrice();
+        }
+
+        System.out.println(" [ Total ] ");
+        System.out.println("W " + sum);
+        System.out.println("주문 하시겠습니까?");
+
+        while(true) {
+            int confirm = getUserInput(String.format("%-10s | %s\n", "1. 주문", "2. 메뉴판"));
+            if (confirm == 1) {
+                System.out.printf("주문이 완료되었습니다. 총 금액은 W %.1f입니다.\n", sum);
+                cart.clearItem();
+                break;
+            } else if (confirm == 2) {
+                System.out.println("메뉴판으로 이동하였습니다.");
+                break;
+            } else {
+                System.out.println("잘못된 값을 입력하였습니다.");
+            }
         }
     }
 }
