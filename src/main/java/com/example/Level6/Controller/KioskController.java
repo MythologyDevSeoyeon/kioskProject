@@ -20,7 +20,7 @@ public class KioskController {
         this.cart = new Cart(new ArrayList<>());
     }
 
-    //키오스크 시작 메소드
+    //키오스크 시작 메소드 (서비스)
     public void start() {
         while (true) {
             KioskView.displayMainMenu(menus, cart.checkItem()); //상위 카테고리 메뉴 출력
